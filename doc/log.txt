@@ -1,0 +1,8 @@
+﻿
+
+# http://127.0.0.1:8080/program/TST00020
+	許功蓋123
+	中文字xyz
+	好用abc
+	
+# BIG5查碼系統(http://billor.chsh.chc.edu.tw/php/Tools/qBig5.php)
