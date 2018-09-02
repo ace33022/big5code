@@ -8,38 +8,29 @@
 
   <head>
 	
-    <base href="/">
-
-    <link rel="icon" href="images/favicon.ico">
-
-    <meta name="theme-color" content="#ffffff">
-
+		<!-- <base href="/" /> -->
+		<!-- <base href="W:/Tool/Package/LangEnv/Java/apache-tomcat/webapps/ROOT/" /> -->
+		
     <meta http-equiv="Content-Language" content="zh-tw">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui" />
 
+    <meta name="theme-color" content="#FFFFFF" />
+
+		<meta name="robots" content="index,follow" />
+		
+		<meta name="keywords" content="big5code" />
+    <meta name="description" content="Query BIG-5 Code" />
+		
     <meta name="author" content="ace33022">
     <meta name="force-login" content="N">
-		
-	<meta name="robots" content="index,follow">
-
-	<meta name="keywords" content="big5code">
-    <meta name="description" content="Query BIG5 code">
 
     <title>BIG5碼查詢</title>
-
-		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
-		<link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap-theme.min.css">
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jasny-bootstrap/3.1.3/css/jasny-bootstrap.min.css" />
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-fileinput/4.3.8/css/fileinput.min.css" media="all" />
-
-    <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-
-		<!-- <link type="text/css" rel="stylesheet" href="https://ace33022.pancakeapps.com/stylesheets/base.css" /> -->
-		<!-- <link type="text/css" rel="stylesheet" href="https://ace33022.pancakeapps.com/stylesheets/ace-base.css" /> -->
 		
+    <link rel="icon" href="icons/favicon.ico">
+
     <script type="text/javascript" src="https://ace33022.github.io/tw/ace33022/NameSpace.js"></script>
 
     <script type="text/javascript" src="https://ace33022.github.io/tw/ace33022/DefaultConfigurations.js"></script>
@@ -47,30 +38,33 @@
 		
     <script type="text/javascript" src="https://ace33022.github.io/tw/ace33022/RequireJSConfig.js"></script>
 
-		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.2.0/require.js"></script>
-
-    <script type="text/javascript">
-
-      requirejs.config(tw.ace33022.RequireJSConfig);
-    </script>
+		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+		<script>
+    	(adsbygoogle = window.adsbygoogle || []).push({
+      	google_ad_client: "ca-pub-2244483882494685",
+        enable_page_level_ads: true
+     	});
+		</script>		
   </head>
 
 	<!--
 		--
-		-- 中文編碼查詢作業
+		-- Big-5碼查詢
+		--
+    -- @description
+    --
+		-- @version 2017/02/20 初始版本。
 		--
 		-- @author ace
 		--
-		-- @version 2017/02/20 初始版本。
-		--
-		-- @see <a href="https://developer.mozilla.org/en-US/docs/Web">Web technology For developers | MDN</a>
-		--
-    -- @see <a href="https://jquery.com/">jQuery</a>
+    -- @see <a href="https://developer.mozilla.org/en-US/docs/Web">Web technology for developers | MDN</a>
+		-- @see <a href="https://developer.mozilla.org/en-US/docs/Web/API">Web APIs | MDN</a>
+		-- @see <a href="https://developer.mozilla.org/en-US/docs/Web/Events">Event reference | MDN</a>
+    -- @see <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript">JavaScript | MDN</a>
     --
-    -- @see <a href="http://getbootstrap.com/">Bootstrap · The world's most popular mobile-first and responsive front-end framework.</a>
-    -- @see <a href="http://getbootstrap.com/components/">Components · Bootstrap</a>
-		-- @see <a href="http://getbootstrap.com/css/">CSS · Bootstrap</a>
-    -- @see <a href="http://getbootstrap.com/javascript/">JavaScript · Bootstrap</a>
+    -- @see <a href="https://jquery.com/">jQuery</a>
+		--
+		-- @see <a href="https://getbootstrap.com/">Bootstrap · The world's most popular mobile-first and responsive front-end framework.</a>
 		--
 		-- @see <a href="http://computer.jges.mlc.edu.tw/index.php/css_category/114-bootstrap%E7%9A%84%E8%A1%A8%E5%96%AE">bootstrap的表單</a>
 		--
@@ -80,181 +74,14 @@
 		-- @see <a href="https://blog.longwin.com.tw/2010/01/javascript-encodeuri-component-utf-8-2010/">JavaScript 的 encodeURIComponent() 會將字串轉換成 UTF-8 編碼 - Tsung's Blog</a>
 		-- @see <a href="https://dotblogs.com.tw/ricochen/2010/07/18/16624">[Javascript]Big5&lt;Switch&gt;Utf8 | RiCo技術農場 - 點部落</a>
 		--
+    -- @comment
+		--
+		-- @todo
+		--
 		-->
 	
   <body>
-		<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-		<!-- 工具網站廣告 -->
-		<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2244483882494685" data-ad-slot="1775165396" data-ad-format="auto"></ins>
-		<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
 		
-		<div class="container-fluid" style="padding-top: 50px;" tabindex="1">
-
-			<div class="row" style="text-align: center;">
-				<div class="col-sm-8 col-sm-offset-2">
-					<div class="form-group">
-						<input type="text" id="txtContent" tabindex="1" placeholder="中文字">
-							
-						<button type="button" class="btn btn-primary" id="btnConfirm" tabindex="2">查詢</button>
-					</div>	
-				</div>	
-			</div>	
-			
-			<div class="row">
-				<div class="col-sm-8 col-sm-offset-2">
-					<div class="table-responsive">
-						<table class="center table table-hover table-striped table-bordered" id="tabCode">
-							<thead>
-								<tr>
-									<th style="text-align: center;">中文字</th>
-									<th style="text-align: center;">UTF8</th>
-									<th style="text-align: center;">BIG5</th>
-								</tr>
-							</thead>
-							<tbody></tbody>
-						</table>
-					</div>
-				</div>
-			</div>	
-		</div>
-
-    <script type="text/javascript">
-
-			requirejs(["tw.ace33022.util.browser.FormUtils", "tw.ace33022.util.CommonUtils", "tw.ace33022.util.browser.ReUtils"], function(FormUtils, CommonUtils, ReUtils) {
-			
-				var saveFile = function(data, filename) {
-				
-					requirejs(["filesaver"], function() {
-					
-						try {
-							
-							saveAs(data, filename);
-						} 
-						catch(e) {
-							
-							FormUtils.showMessage('存檔過程有誤！訊息：' + e.message);
-						}
-					});
-				};
-			
-				var updateCode = function() {
-				
-					requirejs(["blob"], function() {
-					
-						var key1, key2, key3;
-						var obj1, obj2;
-						var change;
-						
-						var blob;
-						
-						for (key1 in EncodedUTF8ToBig5TABLE) {
-						
-							if (typeof EncodedUTF8ToBig5TABLE[key1] == 'object') {
-							
-								obj1 = EncodedUTF8ToBig5TABLE[key1];
-								for (key2 in obj1) {
-								
-									if (typeof obj1[key2] == 'string') {
-									
-										if ((obj1[key2]).length == 6) {
-										
-											// console.log(obj1[key2]);
-										}
-										else {
-										
-											change = obj1[key2].substring(0, 3) + '%' + (parseInt(obj1[key2].charCodeAt(obj1[key2].length - 1))).toString(16);
-											
-											console.log(obj1[key2] + '=>' + change);
-											
-											obj1[key2] = change;
-										}
-									}
-									else {
-									
-										obj2 = obj1[key2];
-										for (key3 in obj2) {
-										
-											if (typeof obj2[key3] == 'string') {
-											
-												if ((obj2[key3]).length == 6) {
-										
-													// console.log(obj2[key3]);
-												}
-												else {
-										
-													change = obj2[key3].substring(0, 3) + '%' + (parseInt(obj2[key3].charCodeAt(obj2[key3].length - 1))).toString(16);
-											
-													console.log(obj2[key3] + '=>' + change);
-													
-													obj2[key3] = change;
-												}
-											}
-											else {
-											
-												console.log('still object');
-											}
-										}
-									}
-								}
-							}
-						}
-						
-						console.log('end change');
-						
-						blob = new Blob([JSON.stringify(EncodedUTF8ToBig5TABLE)], {type: 'text/plain;charset=' + document.characterSet});
-						
-						saveFile(blob, 'code_map.json');
-					});
-				};
-				
-				var bindEvent = function() {
-				
-					jQuery('#btnConfirm').on('click', function(event) {
-					
-						if (jQuery('#txtContent').val() != '') {
-						
-							FormUtils.showProgressbar('編碼資料查詢中，請稍候‧‧‧', function(closeProgressbar) {
-						
-								requirejs(["tw.ace33022.util.StringUtils"], function(StringUtils) {
-							
-									var content = jQuery('#txtContent').val();
-						
-									var index;
-									var tag;
-						
-									jQuery('#tabCode > tbody > tr').remove();
-						
-									for (index = 0; index <= content.length - 1; index++) {
-						
-										tag = '<tr>'
-												+ '  <td style="text-align: center;">' + content[index] + '</td>'
-												+ '  <td style="text-align: center;">' + (encodeURI(content[index])).replace(/%/g, '') + '</td>'
-												+ '  <td style="text-align: center;">' + (StringUtils.EncodedUTF8ToBig5(encodeURI(content[index]))).replace(/%/g, '') + '</td>'
-												+ '</tr>';
-										jQuery('#tabCode > tbody').append(tag);
-									}
-						
-									closeProgressbar();
-								});
-							});
-						}
-						
-						jQuery('#txtContent').focus().select();
-					});
-				}	// bindEvent
-				
-				jQuery(document).ready(function() {
-
-          // Ready Start
-					
-					ReUtils.beforeInitEnv(function() {
-					
-						bindEvent();
-						
-						jQuery('#txtContent').focus();
-					});
-				});
-			});	
-    </script>
+		<!-- <script type="text/javascript" src="nw_inject_end.js"></script> -->
   </body>
 </html>

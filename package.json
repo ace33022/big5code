@@ -1,0 +1,7 @@
+{
+	"main": "nw_main.js",
+	"name": "Big5Code",
+	"version": "0.0.1",
+	"description": "Query Big-5 Code", 
+	"author": "ace"
+}
