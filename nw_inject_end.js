@@ -32,7 +32,7 @@ Configurations.loadJS(Configurations.requirejsFile, function() {
 
 	requirejs.config(tw.ace33022.RequireJSConfig);
 
-	requirejs(["tw.ace33022.util.browser.FormUtils", "tw.ace33022.util.CommonUtils", "tw.ace33022.util.browser.ReUtils"], function(FormUtils, CommonUtils, ReUtils) {
+	requirejs(["tw.ace33022.util.browser.FormUtils", "tw.ace33022.util.browser.ReUtils"], function(FormUtils, ReUtils) {
 
 		jQuery(document).ready(function() {
 		
