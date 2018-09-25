@@ -156,7 +156,7 @@ Configurations.loadJS(Configurations.requirejsFile, function() {
 		
 			jQuery(window).on('focus', function(event) {
 
-				if ((jQuery('.modal-open').length == 0) && (jQuery('.modal-backdrop').length == 0)) {
+				if ((jQuery('.modal-open').length === 0) && (jQuery('.modal-backdrop').length === 0)) {
 				
 					jQuery('#' + txtContentId).focus();
 				}
@@ -168,8 +168,10 @@ Configurations.loadJS(Configurations.requirejsFile, function() {
 					
 				document.getElementById(txtContentId).addEventListener('keypress', function(event) {
 
-					if (event.keyCode == 13) document.getElementById(btnQueryId).click();
+					if (event.keyCode === 13) document.getElementById(btnQueryId).click();
 				});
+				
+				jQuery('#' + txtContentId).on('focus', function(event) { jQuery(this).select(); });
 		
 				jQuery('#' + btnQueryId).on('click', function(event) {
 				
@@ -177,46 +179,51 @@ Configurations.loadJS(Configurations.requirejsFile, function() {
 				
 					if (jQuery('#' + txtContentId).val() != '') {
 					
-						FormUtils.showProgressbar('編碼資料查詢中，請稍候‧‧‧', function(closeProgressbar) {
+						FormUtils.showProgressbar('編碼資料查詢中，請稍候‧‧‧', 
+						
+							function(closeProgressbar) {
 					
-							requirejs(["tw.ace33022.util.StringUtils"], function(StringUtils) {
-			
-								var table = jQuery('<table class="center table table-hover table-striped table-bordered"></table>');
-								var thead = jQuery('<thead></thead>');
-								var tbody = jQuery('<tbody></tbody>');
-								
-								var content = jQuery('#' + txtContentId).val();
-					
-								var index;
-								var tag;
-					
-								tag = '<tr>'
-										+ '  <th style="text-align: center;">中文字</th>'
-										+ '  <th style="text-align: center;">UTF8</th>'
-										+ '  <th style="text-align: center;">BIG5</th>'
-										+ '</tr>'
-								thead.append(tag);
-								
-								for (index = 0; index <= content.length - 1; index++) {
-					
+								requirejs(["tw.ace33022.util.StringUtils"], function(StringUtils) {
+				
+									var table = jQuery('<table class="center table table-hover table-striped table-bordered"></table>');
+									var thead = jQuery('<thead></thead>');
+									var tbody = jQuery('<tbody></tbody>');
+									
+									var content = jQuery('#' + txtContentId).val();
+						
+									var index;
+									var tag;
+						
 									tag = '<tr>'
-											+ '  <td style="text-align: center;">' + content[index] + '</td>'
-											+ '  <td style="text-align: center;">' + (encodeURI(content[index])).replace(/%/g, '') + '</td>'
-											+ '  <td style="text-align: center;">' + (StringUtils.EncodedUTF8ToBig5(encodeURI(content[index]))).replace(/%/g, '') + '</td>'
-											+ '</tr>';
-									tbody.append(tag);
-								}
-								
-								table.append(thead).append(tbody);
-								
-								jQuery('<div class="row" style="padding-top: 5px;"></div>').append(jQuery('<div class="col-md-offset-3 col-md-6"></div>').append(table)).appendTo(jQuery('.container-fluid'));
-					
-								closeProgressbar();
-							});
-						});
+											+ '  <th style="text-align: center;">中文字</th>'
+											+ '  <th style="text-align: center;">UTF8</th>'
+											+ '  <th style="text-align: center;">BIG5</th>'
+											+ '</tr>'
+									thead.append(tag);
+									
+									for (index = 0; index <= content.length - 1; index++) {
+						
+										tag = '<tr>'
+												+ '  <td style="text-align: center;">' + content[index] + '</td>'
+												+ '  <td style="text-align: center;">' + (encodeURI(content[index])).replace(/%/g, '') + '</td>'
+												+ '  <td style="text-align: center;">' + (StringUtils.encodeUTF8ToBig5(encodeURI(content[index]))).replace(/%/g, '') + '</td>'
+												+ '</tr>';
+										tbody.append(tag);
+									}
+									
+									table.append(thead).append(tbody);
+									
+									jQuery('<div class="row" style="padding-top: 5px;"></div>').append(jQuery('<div class="col-md-offset-3 col-md-6"></div>').append(table)).appendTo(jQuery('.container-fluid'));
+						
+									closeProgressbar();
+								});
+							},
+							function() {
+							
+								jQuery('#' + txtContentId).focus().select();
+							}
+						);
 					}
-					
-					jQuery('#' + txtContentId).focus().select();
 				});
 						
 				jQuery('#' + txtContentId).focus();
