@@ -1,30 +1,31 @@
 /**
  *
- * Query Big-5 Code
- *
- * @description
+ * @description Query Big-5 Code
  *
  * @version 2017/02/20 初始版本。
  *
  * @author ace
  *
- * @see <a href="http://requirejs.org/">RequireJS</a>
+ * @see {@link http://requirejs.org/|RequireJS}
  *
- * @see <a href="https://jquery.com/">jQuery</a>
+ * @see {@link https://jquery.com/|jQuery}
  *
- * @see <a href="http://underscorejs.org/">Underscore.js</a>
- * @see <a href="https://github.com/jashkenas/underscore">jashkenas/underscore: JavaScript's utility _ belt</a>
- * @see <a href="http://backbonejs.org/">Backbone.js</a>
- * @see <a href="https://github.com/jashkenas/backbone">jashkenas/backbone: Give your JS App some Backbone with Models, Views, Collections, and Events</a>
- * @see <a href="https://github.com/jashkenas/backbone/wiki/Tutorials%2C-blog-posts-and-example-sites">Tutorials, blog posts and example sites · jashkenas/backbone Wiki</a>
+ * @see {@link https://getbootstrap.com/|Bootstrap · The most popular HTML, CSS, and JS library in the world.}
  *
- * @see <a href="https://getbootstrap.com/">Bootstrap · The most popular HTML, CSS, and JS library in the world.</a>
+ * @see {@link http://underscorejs.org/|Underscore.js}
+ * @see {@link https://github.com/jashkenas/underscore|jashkenas/underscore: JavaScript's utility _ belt}
  *
- * @see <a href="https://stackoverflow.com/questions/19858412/jquery-each-line-in-textarea">jQuery each line in textarea - Stack Overflow</a>
+ * @see {@link http://backbonejs.org/|Backbone.js}
+ * @see {@link https://github.com/jashkenas/backbone|jashkenas/backbone: Give your JS App some Backbone with Models, Views, Collections, and Events}
+ * @see {@link https://github.com/jashkenas/backbone/wiki/Tutorials%2C-blog-posts-and-example-sites|Tutorials, blog posts and example sites · jashkenas/backbone Wiki}
  *
- * @comment
- *
- * @todo
+ * @see {@link http://billor.chsh.chc.edu.tw/php/Tools/qBig5.php|BIG5查碼系統}
+ * @see {@link https://openhome.cc/Gossip/Encoding/JavaScript.html|JavaScript 編碼基礎}
+ * @see {@link https://openhome.cc/Gossip/Encoding/Big5Unicode.html|Big5 網頁難字}
+ * @see {@link https://ithelp.ithome.com.tw/questions/10055026|javascript 轉碼問題 utf-8 轉成 big5 - iT 邦幫忙::一起幫忙解決難題，拯救 IT 人的一天}
+ * @see {@link https://blog.longwin.com.tw/2010/01/javascript-encodeuri-component-utf-8-2010/|JavaScript 的 encodeURIComponent() 會將字串轉換成 UTF-8 編碼 | Tsung's Blog}
+ * @see {@link https://dotblogs.com.tw/ricochen/2010/07/18/16624|[Javascript]Big5&lt;Switch&gt;Utf8 | RiCo技術農場 - 點部落}
+ * @see {@link http://computer.jges.mlc.edu.tw/index.php/css_category/114-bootstrap%E7%9A%84%E8%A1%A8%E5%96%AE|bootstrap的表單}
  *
  */
 
@@ -121,17 +122,25 @@ Configurations.loadJS(Configurations.requirejsFile, function() {
 		
 			var txtContentId = 'txtContent' + Math.random().toString(36).substr(2, 6);
 			var btnQueryId = 'btnQuery' + Math.random().toString(36).substr(2, 6);
+			
+			var tag;
+			
+			tag = '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
+					+ '<!-- big5code -->'
+					+ '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2244483882494685"	data-ad-slot="5888442730"	data-ad-format="auto" data-full-width-responsive="true"></ins>'
+					+ '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
+			jQuery('body').append(tag);
 
-			var tag = '<div class="container-fluid" style="padding-top: 5px;">'
-							+ '  <div class="row">'
-							+ '    <div class="col-md-offset-4 col-md-4">'
-							+ '      <div class="input-group">'
-							+ '        <input type="text" id="' + txtContentId + '" class="form-control" tabindex="0" placeholder="中文字" />'
-							+ '        <span class="input-group-btn"><input type="button" id="' + btnQueryId + '" class="btn btn-primary" tabindex="0" value="查詢" /></span>'
-							+ '      </div>'
-							+ '    </div>'
-							+ '  </div>'
-							+ '</div>';
+			tag = '<div class="container-fluid" style="padding-top: 5px;">'
+					+ '  <div class="row">'
+					+ '    <div class="col-md-offset-4 col-md-4">'
+					+ '      <div class="input-group">'
+					+ '        <input type="text" id="' + txtContentId + '" class="form-control" tabindex="0" placeholder="中文字" />'
+					+ '        <span class="input-group-btn"><input type="button" id="' + btnQueryId + '" class="btn btn-primary" tabindex="0" value="查詢" /></span>'
+					+ '      </div>'
+					+ '    </div>'
+					+ '  </div>'
+					+ '</div>';
 			jQuery('body').append(tag);
 			
 			window.addEventListener('beforeunload', function(event) {
@@ -177,7 +186,7 @@ Configurations.loadJS(Configurations.requirejsFile, function() {
 				
 					jQuery('.row').each(function(index, element) { if (index != 0) jQuery(element).remove(); });
 				
-					if (jQuery('#' + txtContentId).val() != '') {
+					if (jQuery('#' + txtContentId).val() !== '') {
 					
 						FormUtils.showProgressbar('編碼資料查詢中，請稍候‧‧‧', 
 						
