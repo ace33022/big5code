@@ -35,149 +35,149 @@ Configurations.loadJS(Configurations.requirejsFile, function() {
 
 	requirejs(["tw.ace33022.util.browser.FormUtils", "tw.ace33022.util.browser.ReUtils"], function(FormUtils, ReUtils) {
 
-		jQuery(document).ready(function() {
+		var saveFile = function(data, filename) {
 		
-			var saveFile = function(data, filename) {
+			requirejs(["filesaver"], function() {
 			
-				requirejs(["filesaver"], function() {
-				
-					try {
-						
-						saveAs(data, filename);
-					} 
-					catch(e) {
-						
-						FormUtils.showMessage('存檔過程有誤！訊息：' + e.message);
-					}
-				});
-			};
+				try {
+					
+					saveAs(data, filename);
+				} 
+				catch(e) {
+					
+					FormUtils.showMessage('存檔過程有誤！訊息：' + e.message);
+				}
+			});
+		};
+	
+		var updateCode = function() {
 		
-			var updateCode = function() {
+			requirejs(["blob"], function() {
 			
-				requirejs(["blob"], function() {
+				var key1, key2, key3;
+				var obj1, obj2;
+				var change;
 				
-					var key1, key2, key3;
-					var obj1, obj2;
-					var change;
+				var blob;
+				
+				for (key1 in EncodedUTF8ToBig5TABLE) {
+				
+					if (typeof EncodedUTF8ToBig5TABLE[key1] == 'object') {
 					
-					var blob;
-					
-					for (key1 in EncodedUTF8ToBig5TABLE) {
-					
-						if (typeof EncodedUTF8ToBig5TABLE[key1] == 'object') {
+						obj1 = EncodedUTF8ToBig5TABLE[key1];
+						for (key2 in obj1) {
 						
-							obj1 = EncodedUTF8ToBig5TABLE[key1];
-							for (key2 in obj1) {
+							if (typeof obj1[key2] == 'string') {
 							
-								if (typeof obj1[key2] == 'string') {
+								if ((obj1[key2]).length == 6) {
 								
-									if ((obj1[key2]).length == 6) {
-									
-										// console.log(obj1[key2]);
-									}
-									else {
-									
-										change = obj1[key2].substring(0, 3) + '%' + (parseInt(obj1[key2].charCodeAt(obj1[key2].length - 1))).toString(16);
-										
-										console.log(obj1[key2] + '=>' + change);
-										
-										obj1[key2] = change;
-									}
+									// console.log(obj1[key2]);
 								}
 								else {
 								
-									obj2 = obj1[key2];
-									for (key3 in obj2) {
+									change = obj1[key2].substring(0, 3) + '%' + (parseInt(obj1[key2].charCodeAt(obj1[key2].length - 1))).toString(16);
 									
-										if (typeof obj2[key3] == 'string') {
-										
-											if ((obj2[key3]).length == 6) {
+									console.log(obj1[key2] + '=>' + change);
 									
-												// console.log(obj2[key3]);
-											}
-											else {
+									obj1[key2] = change;
+								}
+							}
+							else {
+							
+								obj2 = obj1[key2];
+								for (key3 in obj2) {
+								
+									if (typeof obj2[key3] == 'string') {
 									
-												change = obj2[key3].substring(0, 3) + '%' + (parseInt(obj2[key3].charCodeAt(obj2[key3].length - 1))).toString(16);
-										
-												console.log(obj2[key3] + '=>' + change);
-												
-												obj2[key3] = change;
-											}
+										if ((obj2[key3]).length == 6) {
+								
+											// console.log(obj2[key3]);
 										}
 										else {
-										
-											console.log('still object');
+								
+											change = obj2[key3].substring(0, 3) + '%' + (parseInt(obj2[key3].charCodeAt(obj2[key3].length - 1))).toString(16);
+									
+											console.log(obj2[key3] + '=>' + change);
+											
+											obj2[key3] = change;
 										}
+									}
+									else {
+									
+										console.log('still object');
 									}
 								}
 							}
 						}
 					}
-					
-					blob = new Blob([JSON.stringify(EncodedUTF8ToBig5TABLE)], {type: 'text/plain;charset=' + document.characterSet});
-					
-					saveFile(blob, 'code_map.json');
-				});
-			};
-		
-			var txtContentId = 'txtContent' + Math.random().toString(36).substr(2, 6);
-			var btnQueryId = 'btnQuery' + Math.random().toString(36).substr(2, 6);
-			
-			var tag;
-
-			if ((location.protocol == 'http:') || (location.protocol == 'https:')) {
-			
-				tag = '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-						+ '<!-- big5code -->'
-						+ '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2244483882494685"	data-ad-slot="5888442730"	data-ad-format="auto" data-full-width-responsive="true"></ins>'
-						+ '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
-				jQuery('body').append(tag);
-			}
-
-			tag = '<div class="container-fluid" style="padding-top: 5px;">'
-					+ '  <div class="row">'
-					+ '    <div class="col-md-offset-4 col-md-4">'
-					+ '      <div class="input-group">'
-					+ '        <input type="text" id="' + txtContentId + '" class="form-control" tabindex="0" placeholder="中文字" />'
-					+ '        <span class="input-group-btn"><input type="button" id="' + btnQueryId + '" class="btn btn-primary" tabindex="0" value="查詢" /></span>'
-					+ '      </div>'
-					+ '    </div>'
-					+ '  </div>'
-					+ '</div>';
-			jQuery('body').append(tag);
-			
-			window.addEventListener('beforeunload', function(event) {
-
-				var confirmationMessage = 'Abort playing video?';
-
-				// event.returnValue = confirmationMessage;
-
-				return confirmationMessage;
-			});
-
-			// 這個寫法只有在轉換瀏覽器的Tab時才有作用，轉換不同程式時則無用！？
-			document.addEventListener('visibilitychange',
-
-				function() {
-
-					// if (!document.hidden) initInsertStatus(false);
-					// console.log(document.visibilityState);
-				},
-				false
-			);
-		
-			jQuery(window).on('focus', function(event) {
-
-				if ((jQuery('.modal-open').length === 0) && (jQuery('.modal-backdrop').length === 0)) {
-				
-					jQuery('#' + txtContentId).focus();
 				}
+				
+				blob = new Blob([JSON.stringify(EncodedUTF8ToBig5TABLE)], {type: 'text/plain;charset=' + document.characterSet});
+				
+				saveFile(blob, 'code_map.json');
 			});
-
-			jQuery(window).on('blur', function(event) {});
-
+		};
+		
+		jQuery(document).ready(function() {
+		
 			ReUtils.beforeInitEnv(function() {
 					
+				var txtContentId = 'txtContent' + Math.random().toString(36).substr(2, 6);
+				var btnQueryId = 'btnQuery' + Math.random().toString(36).substr(2, 6);
+				
+				var tag;
+
+				if ((location.protocol == 'http:') || (location.protocol == 'https:')) {
+				
+					tag = '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
+							+ '<!-- big5code -->'
+							+ '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2244483882494685"	data-ad-slot="5888442730"	data-ad-format="auto" data-full-width-responsive="true"></ins>'
+							+ '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
+					jQuery('body').append(tag);
+				}
+
+				tag = '<div class="container-fluid" style="padding-top: 5px;">'
+						+ '  <div class="row">'
+						+ '    <div class="col-md-offset-4 col-md-4">'
+						+ '      <div class="input-group">'
+						+ '        <input type="text" id="' + txtContentId + '" class="form-control" tabindex="0" placeholder="中文字" />'
+						+ '        <span class="input-group-btn"><input type="button" id="' + btnQueryId + '" class="btn btn-primary" tabindex="0" value="查詢" /></span>'
+						+ '      </div>'
+						+ '    </div>'
+						+ '  </div>'
+						+ '</div>';
+				jQuery('body').append(tag);
+				
+				window.addEventListener('beforeunload', function(event) {
+
+					var confirmationMessage = 'Abort playing video?';
+
+					// event.returnValue = confirmationMessage;
+
+					return confirmationMessage;
+				});
+
+				// 這個寫法只有在轉換瀏覽器的Tab時才有作用，轉換不同程式時則無用！？
+				document.addEventListener('visibilitychange',
+
+					function() {
+
+						// if (!document.hidden) initInsertStatus(false);
+						// console.log(document.visibilityState);
+					},
+					false
+				);
+			
+				jQuery(window).on('focus', function(event) {
+
+					if ((jQuery('.modal-open').length === 0) && (jQuery('.modal-backdrop').length === 0)) {
+					
+						jQuery('#' + txtContentId).focus();
+					}
+				});
+
+				jQuery(window).on('blur', function(event) {});
+
 				document.getElementById(txtContentId).addEventListener('keypress', function(event) {
 
 					if (event.keyCode === 13) document.getElementById(btnQueryId).click();
