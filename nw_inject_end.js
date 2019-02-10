@@ -125,7 +125,7 @@ Configurations.loadJS(Configurations.requirejsFile, function() {
 			
 			var tag;
 
-			if (location.protocol == 'http:') {
+			if ((location.protocol == 'http:') || (location.protocol == 'https:')) {
 			
 				tag = '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
 						+ '<!-- big5code -->'
