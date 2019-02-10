@@ -124,12 +124,15 @@ Configurations.loadJS(Configurations.requirejsFile, function() {
 			var btnQueryId = 'btnQuery' + Math.random().toString(36).substr(2, 6);
 			
 			var tag;
+
+			if (location.protocol == 'http:') {
 			
-			tag = '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-					+ '<!-- big5code -->'
-					+ '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2244483882494685"	data-ad-slot="5888442730"	data-ad-format="auto" data-full-width-responsive="true"></ins>'
-					+ '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
-			jQuery('body').append(tag);
+				tag = '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
+						+ '<!-- big5code -->'
+						+ '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2244483882494685"	data-ad-slot="5888442730"	data-ad-format="auto" data-full-width-responsive="true"></ins>'
+						+ '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
+				jQuery('body').append(tag);
+			}
 
 			tag = '<div class="container-fluid" style="padding-top: 5px;">'
 					+ '  <div class="row">'
