@@ -2,7 +2,7 @@
  *
  * @description NW.js inject_js_start
  *
- * @version 2017/09/29 初始版本。
+ * @version 2017/09/29 ace 初始版本。
  *
  * @author ace
  * 
