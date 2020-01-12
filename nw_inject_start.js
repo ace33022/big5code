@@ -10,5 +10,5 @@
  *
  */
 
-process.env.NODE_PATH = 'W:/Tool/Package/LangEnv/JavaScript/nodeJS/node_modules';
-process.env.ConfigurationsFile = 'W:/Tool/Package/LangEnv/Java/apache-tomcat/webapps/ROOT/javascripts/Configurations.js';
+process.env.NODE_PATH = 'W:/tool/package/LangEnv/JavaScript/nodeJS/node_modules';
+process.env.ConfigurationFile = 'W:/tool/package/LangEnv/Java/apache-tomcat/webapps/ROOT/javascript/Configuration.js';

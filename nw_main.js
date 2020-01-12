@@ -32,7 +32,7 @@ var win = nw.Window.open('index.html', {
 
 	// "toolbar": true,
 	// "title": "Hello",
-	"icon": "icons/favicon.ico",
+	// "icon": "icons/favicon.ico",
 	"width": 800,
 	"height": 600,
 	"inject_js_start": "nw_inject_start.js",
