@@ -118,104 +118,104 @@ Configuration.loadJS(Configuration.requirejsFile, function() {
 			});
 		};
 		
-		InitReSetUtil.beforeInitEnv(function() {
-				
-			var txtContentId = 'txtContent' + Math.random().toString(36).substr(2, 6);
-			var btnQueryId = 'btnQuery' + Math.random().toString(36).substr(2, 6);
-			
-			var tag;
+		// InitReSetUtil.beforeInitEnv(function() {});
+		
+		var txtContentId = 'txtContent' + Math.random().toString(36).substr(2, 6);
+		var btnQueryId = 'btnQuery' + Math.random().toString(36).substr(2, 6);
 
-			if ((location.protocol == 'http:') || (location.protocol == 'https:')) {
-			
-				tag = '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
-						+ '<!-- big5code -->'
-						+ '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2244483882494685"	data-ad-slot="5888442730"	data-ad-format="auto" data-full-width-responsive="true"></ins>'
-						+ '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
-				jQuery('body').append(tag);
-			}
+		var tag;
 
-			tag = '<div class="container-fluid" style="padding-top: 5px;">'
-					+ '  <div class="row">'
-					+ '    <div class="col-md-offset-4 col-md-4">'
-					+ '      <div class="input-group">'
-					+ '        <input type="text" id="' + txtContentId + '" class="form-control" tabindex="0" placeholder="中文字" />'
-					+ '        <span class="input-group-btn"><input type="button" id="' + btnQueryId + '" class="btn btn-primary" tabindex="0" value="查詢" /></span>'
-					+ '      </div>'
-					+ '    </div>'
-					+ '  </div>'
-					+ '</div>';
+		if ((location.protocol == 'http:') || (location.protocol == 'https:')) {
+
+			tag = '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
+					+ '<!-- big5code -->'
+					+ '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2244483882494685"	data-ad-slot="5888442730"	data-ad-format="auto" data-full-width-responsive="true"></ins>'
+					+ '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
 			jQuery('body').append(tag);
-			
-			jQuery(window).on('focus', function(event) {
+		}
 
-				if ((jQuery('.modal-open').length === 0) && (jQuery('.modal-backdrop').length === 0)) {
-				
-					jQuery('#' + txtContentId).focus();
-				}
-			});
+		tag = '<div class="container-fluid" style="padding-top: 5px;">'
+				+ '  <div class="row">'
+				+ '    <div class="col-md-offset-4 col-md-4">'
+				+ '      <div class="input-group">'
+				+ '        <input type="text" id="' + txtContentId + '" class="form-control" tabindex="0" placeholder="中文字" />'
+				+ '        <span class="input-group-btn"><input type="button" id="' + btnQueryId + '" class="btn btn-primary" tabindex="0" value="查詢" /></span>'
+				+ '      </div>'
+				+ '    </div>'
+				+ '  </div>'
+				+ '</div>';
+		jQuery('body').append(tag);
 
-			jQuery('#' + txtContentId).on('focus', function(event) { jQuery(this).select(); });
-	
-			document.getElementById(txtContentId).addEventListener('keypress', function(event) {
+		jQuery(window).on('focus', function(event) {
 
-				if (event.keyCode === 13) document.getElementById(btnQueryId).click();
-			});
-			
-			jQuery('#' + btnQueryId).on('click', function(event) {
-			
-				jQuery('.row').each(function(index, element) { if (index != 0) jQuery(element).remove(); });
-			
-				if (jQuery('#' + txtContentId).val() !== '') {
-				
-					CommonForm.showProgressbar('編碼資料查詢中，請稍候‧‧‧', 
-					
-						function(closeProgressbar) {
-				
-							requirejs(["tw.ace33022.util.StringUtil"], function(StringUtil) {
-			
-								var table = jQuery('<table class="center table table-hover table-striped table-bordered"></table>');
-								var thead = jQuery('<thead></thead>');
-								var tbody = jQuery('<tbody></tbody>');
-								
-								var content = jQuery('#' + txtContentId).val();
-					
-								var index;
-								var tag;
-					
-								tag = '<tr>'
-										+ '  <th style="text-align: center;">中文字</th>'
-										+ '  <th style="text-align: center;">UTF8</th>'
-										+ '  <th style="text-align: center;">BIG5</th>'
-										+ '</tr>'
-								thead.append(tag);
-								
-								for (index = 0; index <= content.length - 1; index++) {
-					
-									tag = '<tr>'
-											+ '  <td style="text-align: center;">' + content[index] + '</td>'
-											+ '  <td style="text-align: center;">' + (encodeURI(content[index])).replace(/%/g, '') + '</td>'
-											+ '  <td style="text-align: center;">' + (StringUtil.encodeUTF8ToBig5(encodeURI(content[index]))).replace(/%/g, '') + '</td>'
-											+ '</tr>';
-									tbody.append(tag);
-								}
-								
-								table.append(thead).append(tbody);
-								
-								jQuery('<div class="row" style="padding-top: 5px;"></div>').append(jQuery('<div class="col-md-offset-3 col-md-6"></div>').append(table)).appendTo(jQuery('.container-fluid'));
-					
-								closeProgressbar();
-							});
-						},
-						function() {
-						
-							jQuery('#' + txtContentId).focus().select();
-						}
-					);
-				}
-			});
-					
-			jQuery('#' + txtContentId).focus();
+			if ((jQuery('.modal-open').length === 0) && (jQuery('.modal-backdrop').length === 0)) {
+
+				jQuery('#' + txtContentId).focus();
+			}
 		});
+
+		jQuery('#' + txtContentId).on('focus', function(event) { jQuery(this).select(); });
+
+		document.getElementById(txtContentId).addEventListener('keypress', function(event) {
+
+			if (event.keyCode === 13) document.getElementById(btnQueryId).click();
+		});
+
+		jQuery('#' + btnQueryId).on('click', function(event) {
+
+			jQuery('.row').each(function(index, element) { if (index != 0) jQuery(element).remove(); });
+
+			if (jQuery('#' + txtContentId).val() !== '') {
+
+				CommonForm.showProgressbar('編碼資料查詢中，請稍候‧‧‧', 
+
+					function(closeProgressbar) {
+
+						requirejs(["tw.ace33022.util.StringUtil"], function(StringUtil) {
+
+							var table = jQuery('<table class="center table table-hover table-striped table-bordered"></table>');
+							var thead = jQuery('<thead></thead>');
+							var tbody = jQuery('<tbody></tbody>');
+
+							var content = jQuery('#' + txtContentId).val();
+
+							var index;
+							var tag;
+
+							tag = '<tr>'
+									+ '  <th style="text-align: center;">中文字</th>'
+									+ '  <th style="text-align: center;">UTF8</th>'
+									+ '  <th style="text-align: center;">BIG5</th>'
+									+ '</tr>'
+							thead.append(tag);
+
+							for (index = 0; index <= content.length - 1; index++) {
+
+								tag = '<tr>'
+										+ '  <td style="text-align: center;">' + content[index] + '</td>'
+										+ '  <td style="text-align: center;">' + (encodeURI(content[index])).replace(/%/g, '') + '</td>'
+										+ '  <td style="text-align: center;">' + (StringUtil.encodeUTF8ToBig5(encodeURI(content[index]))).replace(/%/g, '') + '</td>'
+										+ '</tr>';
+								tbody.append(tag);
+							}
+
+							table.append(thead).append(tbody);
+
+							jQuery('<div class="row" style="padding-top: 5px;"></div>').append(jQuery('<div class="col-md-offset-3 col-md-6"></div>').append(table)).appendTo(jQuery('.container-fluid'));
+
+							closeProgressbar();
+						});
+					},
+					function() {
+
+						jQuery('#' + txtContentId).focus().select();
+					}
+				);
+			}
+		});
+
+		jQuery('#' + txtContentId).focus();
+		
 		
 	});
 });
