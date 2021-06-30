@@ -6,6 +6,15 @@
 
 <html lang="zh-Hant-TW">
 
+	<!--
+		--
+    -- @description Big-5碼查詢
+    --
+		-- @version 2020/01/12 ace 初始版本。
+		--
+		-- @author ace
+		--
+		-->
   <head>
 
     <meta http-equiv="Content-Language" content="zh-tw">
@@ -31,11 +40,39 @@
 
     <link rel="icon" href="icon/favicon.ico">
 		
+		<script type="text/javascript">
+		
+			var base;
+			
+			/**
+			 *
+			 * @see {@link https://stackoverflow.com/questions/3494954/how-do-i-set-a-pages-base-href-in-javascript|How do I set a page's base href in Javascript? - Stack Overflow}
+			 *
+			 * @comment 2020/12/06 ace Firebox還未支援base標簽？
+			 * @comment 2020/12/06 ace Chrome設定base標籤後會重新載入script檔案！？藉由這個特性達到程式化載入指定檔案！！
+			 * @comment 2021/06/24 ace 重設base標籤，只會重新載入script檔案，但不會重新載入css檔案？！
+			 *
+			 */
+			if (location.protocol == 'file:') {
+			
+				// document.write('<base href="W:/tool/package/LangEnv/java/apache-tomcat/webapps/ROOT/" />');
+				
+				if (document.getElementsByTagName('head')[0].getElementsByTagName('base').length == 0) {
+				
+					base = document.createElement('base');
+					
+					base.setAttribute('href', 'W:/tool/package/LangEnv/java/apache-tomcat/webapps/ROOT/');
+					
+					document.head.appendChild(base);
+				}
+			}
+		</script>
+		
 		<!--
     <script type="text/javascript" src="javascript/tw/ace33022/NameSpace.js"></script>
 
     <script type="text/javascript" src="javascript/tw/ace33022/DefaultConfiguration.js"></script>
-		<script type="text/javascript" src="javascript/Configuration.js"></script>
+		<script type="text/javascript" src="javascript/tw/Configuration.js"></script>
 
 		<script type="text/javascript" src="javascript/tw/ace33022/RequireJSConfig.js"></script>
 		-->
@@ -48,14 +85,5 @@
     <script type="text/javascript" src="https://ace33022.github.io/tw/ace33022/RequireJSConfig.js"></script>
   </head>
 
-	<!--
-		--
-    -- @description Big-5碼查詢
-    --
-		-- @version 2020/01/12 ace 初始版本。
-		--
-		-- @author ace
-		--
-		-->
   <body></body>
 </html>

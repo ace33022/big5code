@@ -167,9 +167,10 @@ Configuration.loadJS(Configuration.requirejsFile, function() {
 
 			if (jQuery('#' + txtContentId).val() !== '') {
 
-				CommonForm.showProgressbar('編碼資料查詢中，請稍候‧‧‧', 
-
-					function(closeProgressbar) {
+				CommonForm.showMarqueebar({
+				
+					"title": "編碼資料查詢中，請稍候‧‧‧",
+					"onShownCallback": function(closeMarqueebar) {
 
 						requirejs(["tw.ace33022.util.StringUtil"], function(StringUtil) {
 
@@ -203,14 +204,14 @@ Configuration.loadJS(Configuration.requirejsFile, function() {
 
 							jQuery('<div class="row" style="padding-top: 5px;"></div>').append(jQuery('<div class="col-md-offset-3 col-md-6"></div>').append(table)).appendTo(jQuery('.container-fluid'));
 
-							closeProgressbar();
+							closeMarqueebar();
 						});
 					},
-					function() {
+					"afterHiddenCallback": function() {
 
 						jQuery('#' + txtContentId).focus().select();
 					}
-				);
+				});
 			}
 		});
 
