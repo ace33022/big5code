@@ -1,6 +1,4 @@
-<!--
-  <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
--->
+<!-- <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> -->
 
 <!DOCTYPE html>
 
@@ -17,6 +15,8 @@
 		-->
   <head>
 
+    <title>BIG5碼查詢</title>
+		
     <meta http-equiv="Content-Language" content="zh-tw">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,12 +33,13 @@
     <meta name="author" content="ace33022">
 		<meta name="load-nw_inject_end" content="Y">
 
-    <title>BIG5碼查詢</title>
-		
 		<!-- <base href="/" /> -->
-		<!-- <base href="W:/Tool/Package/LangEnv/Java/apache-tomcat/webapps/ROOT/" /> -->
+		<!-- <base href="W:/tool/package/LangEnv/java/apache-tomcat/webapps/ROOT/" /> -->
+		<!-- <base href="W:/tool/package/LangEnv/java/apache-tomcat/webapps/ROOT/htdoc/" /> -->
+		<base href="/" />
 
-    <link rel="icon" href="icon/favicon.ico">
+		<!-- <link type="image/png" rel="icon" href="icon/favicon.png" /> -->
+		<link type="image/png" rel="icon" href="icon/favicon.ico" />
 		
 		<script type="text/javascript">
 		
@@ -53,36 +54,36 @@
 			 * @comment 2021/06/24 ace 重設base標籤，只會重新載入script檔案，但不會重新載入css檔案？！
 			 *
 			 */
-			if (location.protocol == 'file:') {
+			if (document.getElementsByTagName('head')[0].getElementsByTagName('base').length == 0) {
 			
-				// document.write('<base href="W:/tool/package/LangEnv/java/apache-tomcat/webapps/ROOT/" />');
+				base = document.createElement('base');
 				
-				if (document.getElementsByTagName('head')[0].getElementsByTagName('base').length == 0) {
-				
-					base = document.createElement('base');
-					
-					base.setAttribute('href', 'W:/tool/package/LangEnv/java/apache-tomcat/webapps/ROOT/');
-					
-					document.head.appendChild(base);
+				document.head.appendChild(base);
+			}
+			else {
+			
+				base = document.getElementsByTagName('head')[0].getElementsByTagName('base')[0];
+			}
+			
+			if (location.protocol == 'file:') {
+
+				base.setAttribute('href', 'W:/tool/package/LangEnv/java/apache-tomcat/webapps/ROOT/WEB-INF/htdoc/');
+			}
+			else if (location.origin.startsWith('http')) {
+			
+				if ((location.origin.indexOf('127.0.0.1') === -1) && (location.origin.indexOf('localhost') === -1)) {
+			
+					base.setAttribute('href', 'https://ace33022.github.io/htdoc/');
 				}
 			}
 		</script>
 		
-		<!--
-    <script type="text/javascript" src="javascript/tw/ace33022/NameSpace.js"></script>
+		<script type="text/javascript" src="javascript/tw/ace33022/NameSpace.js"></script>
 
-    <script type="text/javascript" src="javascript/tw/ace33022/DefaultConfiguration.js"></script>
+		<script type="text/javascript" src="javascript/tw/ace33022/DefaultConfiguration.js"></script>
 		<script type="text/javascript" src="javascript/tw/Configuration.js"></script>
-
+		
 		<script type="text/javascript" src="javascript/tw/ace33022/RequireJSConfig.js"></script>
-		-->
-
-    <script type="text/javascript" src="https://ace33022.github.io/tw/ace33022/NameSpace.js"></script>
-
-    <script type="text/javascript" src="https://ace33022.github.io/tw/ace33022/DefaultConfiguration.js"></script>
-		<script type="text/javascript" src="https://ace33022.github.io/tw/Configuration.js"></script>
-
-    <script type="text/javascript" src="https://ace33022.github.io/tw/ace33022/RequireJSConfig.js"></script>
   </head>
 
   <body></body>
