@@ -129,7 +129,7 @@ Configuration.loadJS(Configuration.requirejsFile, function() {
 
 			tag = '<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>'
 					+ '<!-- big5code -->'
-					+ '<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-2244483882494685"	data-ad-slot="5888442730"	data-ad-format="auto" data-full-width-responsive="true"></ins>'
+					+ '<ins class="adsbygoogle" style="display:block; text-align: center;" data-ad-client="ca-pub-2244483882494685"	data-ad-slot="5888442730"	data-ad-format="auto" data-full-width-responsive="true"></ins>'
 					+ '<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>';
 			jQuery('body').append(tag);
 		}
