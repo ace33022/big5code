@@ -33,7 +33,7 @@ Configuration.loadJS(Configuration.requirejsFile, function() {
 
 	requirejs.config(tw.ace33022.RequireJSConfig);
 
-	requirejs(["tw.ace33022.util.browser.CommonForm"], function(CommonForm) {
+	requirejs(["tw.ace33022.browser.CommonForm"], function(CommonForm) {
 
 		var saveFile = function(data, filename) {
 		
