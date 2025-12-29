@@ -38,52 +38,67 @@
 		<!-- <base href="W:/tool/package/LangEnv/java/apache-tomcat/webapps/ROOT/htdoc/" /> -->
 		<base href="/" />
 
+		<script type="text/javascript">
+		
+			(function(root) {
+		
+				var base;
+				
+				/**
+				 *
+				 * @see {@link https://stackoverflow.com/questions/3494954/how-do-i-set-a-pages-base-href-in-javascript|How do I set a page's base href in Javascript? - Stack Overflow}
+				 *
+				 * @comment 2020/12/06 ace Firebox還未支援base標簽？
+				 * @comment 2020/12/06 ace Chrome設定base標籤後會重新載入script檔案！？藉由這個特性達到程式化載入指定檔案！！
+				 * @comment 2021/06/24 ace 重設base標籤，只會重新載入script檔案，但不會重新載入css檔案？！
+				 *
+				 */
+				if (document.getElementsByTagName('head')[0].getElementsByTagName('base').length == 0) {
+				
+					base = document.createElement('base');
+					
+					base.setAttribute('href', '/');
+					
+					document.head.appendChild(base);
+				}
+				else {
+				
+					base = document.getElementsByTagName('head')[0].getElementsByTagName('base')[0];
+				}
+			
+				if (location.origin.startsWith('http')) {
+				
+					if ((location.origin.indexOf('127.0.0.1') == -1) && (location.origin.indexOf('localhost') == -1)) {
+				
+						base.setAttribute('href', 'https://ace33022.github.io/htdoc/');
+					}
+				}
+				else if (location.protocol == 'file:') {
+
+					// base.setAttribute('href', 'W:/tool/package/LangEnv/java/apache-tomcat/webapps/ROOT/WEB-INF/htdoc/');
+					// base.setAttribute('href', 'W:/');
+					base.setAttribute('href', 'L:/htdoc/');
+				}
+				else if (location.protocol == 'chrome-extension:') {
+
+					base.setAttribute('href', 'L:/htdoc/');
+					
+					if (typeof nw != 'undefined') {
+					
+						// 在nwJS環境下，可以將base的href屬性設定成chrome-extension:的執行環境路徑，取得工作目錄下的資料。
+						// 在開發過程時，可以將base的href屬性設定成共用的路徑；若要打包成獨立的執行檔時，需要將base的href屬性設定成chrome-extension:的執行環境路徑。
+						// base.setAttribute('href', location.origin + '/');
+					}
+				}
+			})(window);
+		</script>
+		
 		<!-- <link type="image/png" rel="icon" href="icon/favicon.png" /> -->
 		<link type="image/png" rel="icon" href="icon/favicon.ico" />
 		
-		<script type="text/javascript">
-		
-			var base;
-			
-			/**
-			 *
-			 * @see {@link https://stackoverflow.com/questions/3494954/how-do-i-set-a-pages-base-href-in-javascript|How do I set a page's base href in Javascript? - Stack Overflow}
-			 *
-			 * @comment 2020/12/06 ace Firebox還未支援base標簽？
-			 * @comment 2020/12/06 ace Chrome設定base標籤後會重新載入script檔案！？藉由這個特性達到程式化載入指定檔案！！
-			 * @comment 2021/06/24 ace 重設base標籤，只會重新載入script檔案，但不會重新載入css檔案？！
-			 *
-			 */
-			if (document.getElementsByTagName('head')[0].getElementsByTagName('base').length == 0) {
-			
-				base = document.createElement('base');
-				
-				document.head.appendChild(base);
-			}
-			else {
-			
-				base = document.getElementsByTagName('head')[0].getElementsByTagName('base')[0];
-			}
-			
-			if (location.protocol == 'file:') {
-
-				// base.setAttribute('href', 'W:/tool/package/LangEnv/java/apache-tomcat/webapps/ROOT/WEB-INF/htdoc/');
-				base.setAttribute('href', 'W:/htdoc/');
-			}
-			else if (location.origin.startsWith('http')) {
-			
-				if ((location.origin.indexOf('127.0.0.1') == -1) && (location.origin.indexOf('localhost') == -1)) {
-			
-					base.setAttribute('href', 'https://ace33022.github.io/htdoc/');
-				}
-			}
-		</script>
-		
 		<!-- <script type="text/javascript" src="javascript/tw/ace33022/NameSpace.js"></script> -->
-
 		<script type="text/javascript" src="javascript/tw/ace33022/DefaultConfiguration.js"></script>
 		<script type="text/javascript" src="javascript/tw/ace33022/Configuration.js"></script>
-		
 		<!-- <script type="text/javascript" src="javascript/tw/ace33022/RequireJSConfig.js"></script> -->
   </head>
 

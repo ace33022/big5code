@@ -148,31 +148,31 @@ Configuration.loadJS(Configuration.requirejsFile, function() {
 
 		jQuery(window).on('focus', function(event) {
 
-			if ((jQuery('.modal-open').length === 0) && (jQuery('.modal-backdrop').length === 0)) {
+			if ((jQuery('.modal-open').length == 0) && (jQuery('.modal-backdrop').length == 0)) {
 
 				jQuery('#' + txtContentId).focus();
 			}
 		});
 
-		jQuery('#' + txtContentId).on('focus', function(event) { jQuery(this).select(); });
+		jQuery('#' + txtContentId).on('focus', function(event) {jQuery(this).select();});
 
 		document.getElementById(txtContentId).addEventListener('keypress', function(event) {
 
-			if (event.keyCode === 13) document.getElementById(btnQueryId).click();
+			if (event.keyCode == 13) document.getElementById(btnQueryId).click();
 		});
 
 		jQuery('#' + btnQueryId).on('click', function(event) {
 
 			jQuery('.row').each(function(index, element) { if (index != 0) jQuery(element).remove(); });
 
-			if (jQuery('#' + txtContentId).val() !== '') {
+			if (jQuery('#' + txtContentId).val() != '') {
 
 				CommonForm.showMarqueebar({
 				
 					"title": "編碼資料查詢中，請稍候‧‧‧",
 					"onShownCallback": function(closeMarqueebar) {
 
-						requirejs(["tw.ace33022.util.StringUtil"], function(StringUtil) {
+						requirejs(["tw.ace33022.functions.Word"], function(Word) {
 
 							var table = jQuery('<table class="center table table-hover table-striped table-bordered"></table>');
 							var thead = jQuery('<thead></thead>');
@@ -195,7 +195,7 @@ Configuration.loadJS(Configuration.requirejsFile, function() {
 								tag = '<tr>'
 										+ '  <td style="text-align: center;">' + content[index] + '</td>'
 										+ '  <td style="text-align: center;">' + (encodeURI(content[index])).replace(/%/g, '') + '</td>'
-										+ '  <td style="text-align: center;">' + (StringUtil.encodeUTF8ToBig5(encodeURI(content[index]))).replace(/%/g, '') + '</td>'
+										+ '  <td style="text-align: center;">' + (Word.encodeUTF8ToBig5(encodeURI(content[index]))).replace(/%/g, '') + '</td>'
 										+ '</tr>';
 								tbody.append(tag);
 							}
@@ -216,7 +216,5 @@ Configuration.loadJS(Configuration.requirejsFile, function() {
 		});
 
 		jQuery('#' + txtContentId).focus();
-		
-		
 	});
 });
